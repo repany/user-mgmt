@@ -5,8 +5,15 @@
         <div class="col-sm-8">
             <h3>Contact Us</h3>
             <form action="{{ url('users') }}"  method="post">
+                {{ csrf_field() }}
                 <div class="form-group">
-                    {{ csrf_field() }}
+
+                        <select class="form-control" name="role_id" placeholder="Role">
+                            @foreach($roles as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
+                            @endforeach
+                        </select><br>
+
                     <input type="text" class="form-control" name="first_name" placeholder="FIRST NAME"><br>
                     <input type="text" class="form-control" name="last_name" placeholder="LAST NAME"><br>
                     <input type="address" class="form-control" name="address" placeholder="Address"><br>

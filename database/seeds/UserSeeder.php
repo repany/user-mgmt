@@ -15,13 +15,15 @@ class UserSeeder extends Seeder
 
         $faker = \Faker\Factory::create('ne_NP');
 
-        for( $i =0; $i < 100; $i++ ){
+        for( $i =0; $i < 1; $i++ ){
 
             $user = User::create([
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
                 'address' => $faker->address,
-                'phone' => $faker->phoneNumber
+                'phone' => $faker->phoneNumber,
+                'password' => 'password',
+                'email' => $faker->safeEmail
             ]);
 
             echo $user->name . " seeded " . PHP_EOL;

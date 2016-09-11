@@ -28,11 +28,17 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('users', 'UserController@index')->name('userList');
-    Route::get('users/create', 'UserController@create')->name('createUser');
-    Route::get('users/{user}/edit', 'UserController@edit')->name('editUser');
-    Route::post('users/{id}/update', 'UserController@update')->name('updateUser');
-    Route::delete('users/{id}', 'UserController@delete')->name('deleteUser');
-    Route::post('users', 'UserController@store');
+    Route::get('login', 'UserController@login')->name('login');
+    Route::get('logout', 'UserController@logout')->name('logout');
+    Route::post('login', 'UserController@postLogin')->name('postLogin');
+    Route::group(['middleware' => 'auth'],function(){
+        Route::get('users', 'UserController@index')->name('userList');
+        Route::get('users/create', 'UserController@create')->name('createUser');
+        Route::get('users/{user}/edit', 'UserController@edit')->name('editUser');
+        Route::post('users/{id}/update', 'UserController@update')->name('updateUser');
+        Route::delete('users/{id}', 'UserController@delete')->name('deleteUser');
+        Route::post('users', 'UserController@store');
+    });
+
 
 });

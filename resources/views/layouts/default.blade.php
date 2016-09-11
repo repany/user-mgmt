@@ -13,6 +13,10 @@
 </head>
 <body>
 <div class="container">
+    @if(Auth::check())
+      <a class="btn btn-info" href="{{route('logout')}}">Logout</a>
+        Logged In as: {{Auth::user()->name}}
+        @endif
    @yield('content')
 </div>
 </body>

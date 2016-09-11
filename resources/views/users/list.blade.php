@@ -15,6 +15,7 @@
                     <th>Full Name</th>
                     <th>Address</th>
                     <th>Phone</th>
+                    <th>Role</th>
                     <th>Action</th>
                 </tr>
                 @foreach( $users as $user )
@@ -22,6 +23,7 @@
                         <td>{{$user->name}}</td>
                         <td>{{ $user->address }}</td>
                         <td>{{ $user->phone }}</td>
+                        <td>{{ empty($user->role)? "Unsigned" : $user->role->name }}</td>
                         <td><a href="{{ /*url('users/'.$user->id ."/edit")*/ route('editUser',$user->id) }}">Edit</a>&nbsp;
                             <button class="btn btn-danger delete-user" data-id="{{ $user->id }}" data-random="this is a test" title="deletebuttn">Delete</button></td>
 

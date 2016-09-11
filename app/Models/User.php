@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name','address','phone','email','password'
+        'first_name','last_name','address','phone','email','password','role_id','auth_token'
     ];
 
     protected $appends = [
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','role_id'
     ];
 
     function getNameAttribute(){
@@ -41,5 +41,14 @@ class User extends Authenticatable
     function setPasswordAttribute($value){
 
         $this->attributes['password']=bcrypt($value);
+    }
+
+    function role(){
+        return $this->belongsTo(Role::class);
+    }
+
+    function scopeWithToken( $q, $token ) {
+
+        return $q->whereAuthToken( $token );
     }
 }
